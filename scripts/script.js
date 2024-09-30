@@ -1,5 +1,5 @@
 let timerInterval;
-let totalTime = 6 * 60; // 6 minutos en segundos
+let totalTime = 2 * 60; // 6 minutos en segundos
 let examReviewed = false; // Variable para evitar múltiples pulsaciones en el botón de revisión
 
 function startTimer() {
@@ -230,11 +230,14 @@ function exportToTxt() {
         docContent += `Pregunta: ${cleanedQuestion}\nExplicación: ${cleanedResult}\n`;
     });
 
+    // Obtener el nombre de la página actual sin la extensión .html
+    const pageTitle = window.location.pathname.split('/').pop().replace('.html', '');
+
     // Descargar el archivo TXT sin saltos de línea adicionales ni "Marcar para guardar"
     const blob = new Blob([docContent.trim()], { type: 'text/plain' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = 'preguntas_importantes.txt';
+    link.download = `preguntas_importantes_${pageTitle}.txt`;
     link.click();
 }
 
