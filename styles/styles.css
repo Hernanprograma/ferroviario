@@ -67,6 +67,28 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+#exportTxtButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    color: white;
+    background-color: #4CAF50; /* Color verde para el botón */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 1000; /* Asegurar que el botón esté visible sobre otros elementos */
+}
+
+#exportTxtButton:hover {
+    background-color: #45a049; /* Color cuando pasas el mouse sobre el botón */
+}
+
+#exportTxtButton:focus {
+    outline: none; /* Eliminar el borde de enfoque predeterminado */
+}
+
 
 #submitButton {
   background-color: #4caf50;
