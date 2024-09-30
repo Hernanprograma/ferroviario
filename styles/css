@@ -1,0 +1,122 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+h1,
+h3 {
+  text-align: center;
+}
+
+.question {
+  margin: 20px 0;
+}
+
+.options label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.result {
+  display: none;
+  color: #8e662e;
+  background-color: #fcefdc;
+  padding: 5px;
+  margin-top: 20px;
+}
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+}
+
+.score {
+  font-size: 1.5em;
+  display: none;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 50%;
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  line-height: 60px;
+  font-weight: bold;
+}
+
+.pass {
+  background-color: green;
+  color: white;
+}
+
+.fail {
+  background-color: red;
+  color: white;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#submitButton {
+  background-color: #4caf50;
+}
+
+#submitButton:hover {
+  background-color: #45a049;
+}
+
+#refreshButton {
+  background-color: #f44336;
+}
+
+#refreshButton:hover {
+  background-color: #d32f2f;
+}
+
+/* Estilo para el temporizador flotante */
+#timer {
+  font-size: 1.5em;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: green; /* Color inicial verde */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+/* Animación de parpadeo */
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+#questionsContainer::after {
+  content: '';
+  display: table;
+  clear: both;
+}
