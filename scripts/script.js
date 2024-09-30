@@ -245,4 +245,3 @@ window.onload = function () {
     shuffleQuestions();
     startTimer();
 };
-
