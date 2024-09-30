@@ -45,6 +45,10 @@ function setTimerToRevision(timerElement, score) {
             exportTxtButton.remove(); // Desaparecer el botón después de la exportación
         };
         timerElement.insertAdjacentElement('afterend', exportTxtButton);
+
+        // Asegurar que el botón sea visible en pantallas móviles
+        exportTxtButton.style.display = 'block';
+        exportTxtButton.style.zIndex = '1000'; // Asegurar que esté por encima de otros elementos
     }
 }
 
@@ -241,6 +245,7 @@ function exportToTxt() {
     link.click();
 }
 
+// Refrescar la página al hacer clic en el botón de refrescar
 document.getElementById('refreshButton').addEventListener('click', function () {
     location.reload();
 });
