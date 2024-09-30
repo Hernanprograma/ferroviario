@@ -20,8 +20,8 @@ function startTimer() {
 
         if (totalTime <= 0) {
             clearInterval(timerInterval);
-            setTimerToRevision(timerElement);
-            calculateScore();
+            const score = calculateScore(); // Calcular la puntuación primero
+            setTimerToRevision(timerElement, score); // Pasar la puntuación
         }
     }, 1000);
 }
@@ -181,7 +181,6 @@ function calculateScore() {
     const messageElement = document.getElementById('message');
     const timerElement = document.getElementById('timer');
     if (timerElement) {
-        setTimerToRevision(timerElement, score); // Pasar la nota al temporizador
         clearInterval(timerInterval);
     }
 
@@ -191,6 +190,8 @@ function calculateScore() {
     } else {
         messageElement.textContent = '¡Ánimo! Puedes mejorar.';
     }
+
+    return score; // Retornar la puntuación
 }
 
 // Exportar las preguntas marcadas a un archivo TXT
