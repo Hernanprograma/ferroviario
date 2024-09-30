@@ -1,5 +1,5 @@
 let timerInterval;
-let totalTime = 5 * 60; // 6 minutos en segundos
+let totalTime = 6 * 60; // 6 minutos en segundos
 let examReviewed = false; // Variable para evitar múltiples pulsaciones en el botón de revisión
 
 function startTimer() {
