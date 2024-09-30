@@ -21,7 +21,8 @@ function startTimer() {
         if (totalTime <= 0) {
             clearInterval(timerInterval);
             const score = calculateScore(); // Calcular la puntuación primero
-            setTimerToRevision(timerElement, score); // Pasar la puntuación
+            setTimerToRevision(timerElement, score);
+            removeSubmitButton(); // Eliminar el botón de "Resolver el examen"
         }
     }, 1000);
 }
@@ -29,12 +30,6 @@ function startTimer() {
 function setTimerToRevision(timerElement, score) {
     if (examReviewed) return; // Evitar múltiples pulsaciones
     examReviewed = true; // Marcar como revisado
-
-    // Ocultar el botón de "Resolver el examen" si aún existe
-    const submitButton = document.getElementById('submitButton');
-    if (submitButton) {
-        submitButton.remove(); // Eliminar el botón
-    }
 
     // Cambiar el texto de "Revisión de examen" y añadir la nota a la derecha
     timerElement.style.backgroundColor = 'green';
@@ -46,24 +41,32 @@ function setTimerToRevision(timerElement, score) {
         const exportTxtButton = document.createElement('button');
         exportTxtButton.textContent = 'Exportar a TXT';
         exportTxtButton.id = 'exportTxtButton';
-        exportTxtButton.onclick = function() {
+        exportTxtButton.onclick = function () {
             exportToTxt();
             exportTxtButton.remove(); // Desaparecer el botón después de la exportación
         };
         timerElement.insertAdjacentElement('afterend', exportTxtButton);
-
-        // Asegurar que el botón sea visible en pantallas móviles
-        exportTxtButton.style.display = 'block';
-        exportTxtButton.style.zIndex = '1000'; // Asegurar que esté por encima de otros elementos
     }
+
+    removeSubmitButton(); // Eliminar el botón de "Resolver el examen" cuando se revisa
 }
 
+// Formatear el tiempo en minutos y segundos
 function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${minutes}:${secs < 10 ? '0' + secs : secs}`;
 }
 
+// Eliminar el botón de "Resolver el examen"
+function removeSubmitButton() {
+    const submitButton = document.getElementById('submitButton');
+    if (submitButton) {
+        submitButton.remove();
+    }
+}
+
+// Barajar las preguntas y opciones
 function shuffleQuestions() {
     const questionsContainer = document.getElementById('questionsContainer');
     const questions = document.querySelectorAll('.question');
@@ -191,6 +194,7 @@ function calculateScore() {
     const messageElement = document.getElementById('message');
     const timerElement = document.getElementById('timer');
     if (timerElement) {
+        setTimerToRevision(timerElement, score); // Pasar la nota al temporizador
         clearInterval(timerInterval);
     }
 
@@ -201,7 +205,7 @@ function calculateScore() {
         messageElement.textContent = '¡Ánimo! Puedes mejorar.';
     }
 
-    return score; // Retornar la puntuación
+    removeSubmitButton(); // Eliminar el botón de "Resolver el examen" cuando se calcula la puntuación
 }
 
 // Exportar las preguntas marcadas a un archivo TXT
@@ -218,7 +222,7 @@ function exportToTxt() {
         const question = checkbox.closest('.question');
         const questionText = question.querySelector('p').textContent;
         const resultDiv = question.querySelector('.result');
-        
+
         // Eliminar solo el texto del checkbox "Marcar para guardar" y capturar todo lo demás dentro de .result
         const resultClone = resultDiv.cloneNode(true);
         const checkboxAndLabel = resultClone.querySelector('label');
@@ -250,11 +254,6 @@ function exportToTxt() {
     link.download = `preguntas_importantes_${pageTitle}.txt`;
     link.click();
 }
-
-// Refrescar la página al hacer clic en el botón de refrescar
-document.getElementById('refreshButton').addEventListener('click', function () {
-    location.reload();
-});
 
 window.onload = function () {
     shuffleQuestions();
