@@ -30,6 +30,12 @@ function setTimerToRevision(timerElement, score) {
     if (examReviewed) return; // Evitar múltiples pulsaciones
     examReviewed = true; // Marcar como revisado
 
+    // Ocultar el botón de "Resolver el examen" si aún existe
+    const submitButton = document.getElementById('submitButton');
+    if (submitButton) {
+        submitButton.remove(); // Eliminar el botón
+    }
+
     // Cambiar el texto de "Revisión de examen" y añadir la nota a la derecha
     timerElement.style.backgroundColor = 'green';
     timerElement.innerHTML = `Revisión de examen <span id="scoreBox" style="background-color: ${score >= 5 ? 'green' : 'red'}; color: white; padding: 5px 10px; border-radius: 5px; margin-left: 10px;">Nota: ${score.toFixed(2)}</span>`;
