@@ -254,6 +254,9 @@ function exportToTxt() {
     link.download = `preguntas_importantes_${pageTitle}.txt`;
     link.click();
 }
+document.getElementById('refreshButton').addEventListener('click', function () {
+    location.reload(); // Recarga la página
+});
 
 window.onload = function () {
     shuffleQuestions();
