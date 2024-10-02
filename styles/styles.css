@@ -8,12 +8,16 @@ h3 {
   text-align: center;
 }
 
-.question {
-  margin: 20px 0;
+/* La pregunta (el elemento <p>) debe estar en negrita */
+.question p {
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
+/* Las opciones (los labels dentro de .options) deben verse en estilo normal */
 .options label {
   display: block;
+  font-weight: normal; /* Aseguramos que las opciones no estén en negrita */
   margin-bottom: 5px;
 }
 
