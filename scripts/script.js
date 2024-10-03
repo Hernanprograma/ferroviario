@@ -6,8 +6,8 @@ function startTimer() {
     const questions = document.querySelectorAll('.question');
     const questionCount = questions.length;
 
-    // Cada pregunta tiene 40 segundos, multiplicamos por la cantidad de preguntas
-    totalTime = questionCount * 40; // Calculamos el tiempo total
+    // Cada pregunta tiene 30 segundos, multiplicamos por la cantidad de preguntas
+    totalTime = questionCount * 30; // Calculamos el tiempo total
 
     const timerElement = document.createElement('div');
     timerElement.id = 'timer';
