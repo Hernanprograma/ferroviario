@@ -1,8 +1,14 @@
 let timerInterval;
-let totalTime = 6 * 60; // 6 minutos en segundos
+let totalTime; // El tiempo total será calculado en función del número de preguntas
 let examReviewed = false; // Variable para evitar múltiples pulsaciones en el botón de revisión
 
 function startTimer() {
+    const questions = document.querySelectorAll('.question');
+    const questionCount = questions.length;
+
+    // Cada pregunta tiene 40 segundos, multiplicamos por la cantidad de preguntas
+    totalTime = questionCount * 40; // Calculamos el tiempo total
+
     const timerElement = document.createElement('div');
     timerElement.id = 'timer';
     timerElement.textContent = formatTime(totalTime);
@@ -254,6 +260,7 @@ function exportToTxt() {
     link.download = `preguntas_importantes_${pageTitle}.txt`;
     link.click();
 }
+
 document.getElementById('refreshButton').addEventListener('click', function () {
     location.reload(); // Recarga la página
 });
