@@ -26,6 +26,11 @@ h3 {
   font-weight: normal; /* Estilo normal para los párrafos dentro de .result */
 }
 
+/* El texto dentro de .result no debe estar en negrita */
+p.result {
+  font-weight: normal;
+}
+
 .result {
   display: none;
   color: #8e662e;
