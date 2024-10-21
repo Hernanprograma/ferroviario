@@ -135,3 +135,18 @@ button {
   display: table;
   clear: both;
 }
+body::before {
+  content: '';
+  background-image: url('https://www.adif.es/documents/20124/739109/01.jpg/434dc7f6-8a7b-19b0-d0dd-9e2c1dbe9948?t=1593757831365&download=true');
+  background-size: cover; /* La imagen cubrirá todo el fondo */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-position: center center; /* Centra la imagen */
+  background-attachment: fixed; /* La imagen permanece fija al hacer scroll */
+  opacity: 0.2; /* Ajusta la transparencia (0 es transparente, 1 es opaco) */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Coloca el fondo detrás del contenido */
+}
