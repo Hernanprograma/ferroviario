@@ -79,11 +79,18 @@ function shuffleQuestions() {
     const questionsArray = Array.from(questions);
 
     const questionContents = questionsArray.map(question => {
-        const questionP = question.querySelector('p').textContent;
+        const questionP = question.querySelector('p').textContent.trim();
+
+        // Eliminar números al inicio seguidos de punto y espacio (opcional)
+        const questionText = questionP.replace(/^\d+\.\s*/, '');
+
         const options = Array.from(question.querySelectorAll('.options label')).map(label => {
             const input = label.querySelector('input');
             const fullOptionText = label.textContent.trim();
-            const optionText = fullOptionText.substring(fullOptionText.indexOf('. ') + 2);
+
+            // Expresión regular para detectar letras y paréntesis al inicio
+            const optionText = fullOptionText.replace(/^[A-ZÁÉÍÓÚÜÑ]+\)\s*/, '');
+
             return {
                 optionText,
                 value: input.value,
@@ -91,14 +98,16 @@ function shuffleQuestions() {
             };
         });
         const result = question.querySelector('.result').innerHTML;
-        return { questionP, options, result };
+        return { questionText, options, result };
     });
 
+    // Barajar las preguntas
     questionContents.sort(() => Math.random() - 0.5);
 
     questionsArray.forEach((question, index) => {
         const questionP = question.querySelector('p');
-        questionP.textContent = `${index + 1}. ${questionContents[index].questionP.split('. ')[1]}`;
+        questionP.textContent = `${index + 1}. ${questionContents[index].questionText}`;
+
         const options = question.querySelectorAll('.options label');
         const optionLetters = ['A', 'B', 'C', 'D'];
 
@@ -110,7 +119,7 @@ function shuffleQuestions() {
 
             label.innerHTML = '';
             label.appendChild(input);
-            label.insertAdjacentText('beforeend', `${optionLetters[i]}. ${optionContent.optionText}`);
+            label.insertAdjacentText('beforeend', ` ${optionContent.optionText}`);
         });
 
         const result = question.querySelector('.result');
@@ -118,6 +127,7 @@ function shuffleQuestions() {
         result.style.display = 'none';
     });
 
+    // Barajar las opciones dentro de cada pregunta
     questionsArray.forEach(question => {
         shuffleOptions(question);
     });
@@ -130,7 +140,10 @@ function shuffleOptions(question) {
     const optionContents = options.map(option => {
         const input = option.querySelector('input');
         const fullOptionText = option.textContent.trim();
-        const optionText = fullOptionText.substring(fullOptionText.indexOf('. ') + 2);
+
+        // Expresión regular para detectar letras y paréntesis al inicio
+        const optionText = fullOptionText.replace(/^[A-ZÁÉÍÓÚÜÑ]+\)\s*/, '');
+
         return {
             optionText,
             value: input.value,
@@ -138,6 +151,7 @@ function shuffleOptions(question) {
         };
     });
 
+    // Barajar las opciones
     optionContents.sort(() => Math.random() - 0.5);
 
     const optionLetters = ['A', 'B', 'C', 'D'];
@@ -148,7 +162,7 @@ function shuffleOptions(question) {
 
         option.innerHTML = '';
         option.appendChild(input);
-        option.insertAdjacentText('beforeend', `${optionLetters[index]}. ${optionContents[index].optionText}`);
+        option.insertAdjacentText('beforeend', `${optionLetters[index]}) ${optionContents[index].optionText}`);
     });
 }
 
