@@ -83,7 +83,8 @@ function shuffleQuestions() {
         const options = Array.from(question.querySelectorAll('.options label')).map(label => {
             const input = label.querySelector('input');
             const fullOptionText = label.textContent.trim();
-            const optionText = fullOptionText.substring(fullOptionText.indexOf('. ') + 2);
+            // Remover cualquier letra (A-D) y punto al inicio de la opción
+            const optionText = fullOptionText.replace(/^[A-D]\.\s*/, '');
             return {
                 optionText,
                 value: input.value,
@@ -100,12 +101,11 @@ function shuffleQuestions() {
         const questionP = question.querySelector('p');
         // Obtener el texto original de la pregunta
         const originalQuestionText = questionContents[index].questionP;
-
         // Remover cualquier número y punto al inicio de la pregunta
         const questionTextWithoutNumber = originalQuestionText.replace(/^\d+\.\s*/, '');
-
         // Asignar el nuevo texto de la pregunta con el número actualizado
         questionP.textContent = `${index + 1}. ${questionTextWithoutNumber}`;
+
         const options = question.querySelectorAll('.options label');
         const optionLetters = ['A', 'B', 'C', 'D'];
 
@@ -137,7 +137,8 @@ function shuffleOptions(question) {
     const optionContents = options.map(option => {
         const input = option.querySelector('input');
         const fullOptionText = option.textContent.trim();
-        const optionText = fullOptionText.substring(fullOptionText.indexOf('. ') + 2);
+        // Remover cualquier letra (A-D) y punto al inicio de la opción
+        const optionText = fullOptionText.replace(/^[A-D]\.\s*/, '');
         return {
             optionText,
             value: input.value,
