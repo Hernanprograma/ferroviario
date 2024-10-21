@@ -98,7 +98,14 @@ function shuffleQuestions() {
 
     questionsArray.forEach((question, index) => {
         const questionP = question.querySelector('p');
-        questionP.textContent = `${index + 1}. ${questionContents[index].questionP.split('. ')[1]}`;
+        // Obtener el texto original de la pregunta
+        const originalQuestionText = questionContents[index].questionP;
+
+        // Remover cualquier número y punto al inicio de la pregunta
+        const questionTextWithoutNumber = originalQuestionText.replace(/^\d+\.\s*/, '');
+
+        // Asignar el nuevo texto de la pregunta con el número actualizado
+        questionP.textContent = `${index + 1}. ${questionTextWithoutNumber}`;
         const options = question.querySelectorAll('.options label');
         const optionLetters = ['A', 'B', 'C', 'D'];
 
