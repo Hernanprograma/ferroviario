@@ -142,7 +142,7 @@ body::before {
   background-repeat: no-repeat; /* Evita que la imagen se repita */
   background-position: center center; /* Centra la imagen */
   background-attachment: fixed; /* La imagen permanece fija al hacer scroll */
-  opacity: 0.2; /* Ajusta la transparencia (0 es transparente, 1 es opaco) */
+  opacity: 0.1; /* Ajusta la transparencia (0 es transparente, 1 es opaco) */
   position: fixed;
   top: 0;
   left: 0;
